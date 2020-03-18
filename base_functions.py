@@ -28,6 +28,3 @@ def plot_hist(data): # plot histogram
 def plot_hist_bin(data, bins): # plot histogram with bins
     plt.hist(data.ravel(), bins=bins, histtype="bar")
     plt.show()
-
-def get_grey_level_array(data): # returns 16-bin distribution
-    return np.histogram(data.ravel(), bins=16)[0]
