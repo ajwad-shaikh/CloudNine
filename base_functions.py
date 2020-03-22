@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import h5py
 
-if __name__ == "__main__":
+def main():
     f = h5py.File('Dataset/test1.h5', 'r')
     # print(*list(f['PRODUCT_INFORMATION'].attrs.items()), sep='\n')
     # dset = f['VHRR']['Image Data']['VHRR_TIR']
@@ -44,7 +44,7 @@ def show_images(images: list) -> None:
         f.add_subplot(1, n, i + 1)
         plt.imshow(images[i], cmap='gray')
         plt.axis('off')
-    
-    
-
     plt.show(block=True)
+
+if __name__ == "__main__":
+    main()

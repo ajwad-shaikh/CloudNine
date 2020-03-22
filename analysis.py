@@ -3,7 +3,6 @@ from skimage.feature import greycoprops, greycomatrix, shape_index, canny
 from skimage.morphology import opening, closing, disk
 from skimage.measure import perimeter
 import base_functions as bf
-import matplotlib.pyplot as plt
 
 def main():
     data = bf.load_image("test2.h5")
