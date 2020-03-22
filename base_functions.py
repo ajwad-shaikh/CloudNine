@@ -4,11 +4,12 @@ import h5py
 
 if __name__ == "__main__":
     f = h5py.File('Dataset/test1.h5', 'r')
-    dset = f['VHRR']['Image Data']['VHRR_TIR']
-    print(dset)
-    data = np.array(dset[:,:])
-    plt.imshow(data, cmap='gray')
-    plt.show()
+    # print(*list(f['PRODUCT_INFORMATION'].attrs.items()), sep='\n')
+    # dset = f['VHRR']['Image Data']['VHRR_TIR']
+    # print(dset)
+    # data = np.array(dset[:,:])
+    #plt.imshow(data, cmap='gray')
+    #plt.show()
 
 def load_image(filename): # give filename inside Dataset folder, returns numpy array
     f = h5py.File('Dataset/' + filename, 'r')
@@ -28,3 +29,8 @@ def plot_hist(data): # plot histogram
 def plot_hist_bin(data, bins): # plot histogram with bins
     plt.hist(data.ravel(), bins=bins, histtype="bar")
     plt.show()
+
+def get_image_information(filename):
+    f = h5py.File('Dataset/' + filename, 'r')
+    print(*list(f['PRODUCT_INFORMATION'].attrs.items()), sep='\n')
+    print(*list(f['PRODUCT_METADATA']['PRODUCT_DETAILS'].attrs.items()), sep='\n')
