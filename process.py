@@ -1,30 +1,40 @@
 import base_functions as bf
 import analysis as an
 
-filename = "test2.h5"
+def main():
+    filename = "test2.h5"
+    data = bf.load_image(filename)
+    bf.get_image_information(filename)
 
-# load image
-data = bf.load_image(filename)
-bf.get_image_information(filename)
+    bf.plot_hist_bin(data, 16)
 
-bf.plot_hist_bin(data, 16)
+    grey = an.get_grey_level_array(data)
 
-# grey-level array
-grey = an.get_grey_level_array(data)
-#print(grey)
+    text = an.get_texture_analysis(data)
 
-# texture analysis
-text = an.get_texture_analysis(data)
-#print(text)
+    shape = an.get_shape_analysis(data, False)
+    #print(shape)
 
-# shape analysis
-shape = an.get_shape_analysis(data, False)
-#print(shape)
+    finalArray = {
+        "grey": grey,
+        "texture": text,
+        "shape": shape
+    }
 
-finalArray = {
-    "grey": grey,
-    "texture": text,
-    "shape": shape
-}
+    print(finalArray)
 
-print(finalArray)
+def apply_algorithms(filename):
+    data = bf.load_image(filename)      # load image
+    grey = an.get_grey_level_array(data)    # grey-level array
+    text = an.get_texture_analysis(data)    # texture analysis
+    shape = an.get_shape_analysis(data, False)    # shape analysis
+    finalArray = {
+        "grey": grey,
+        "texture": text,
+        "shape": shape
+    }
+
+    return finalArray
+
+if __name__ == "__main__":
+    main()

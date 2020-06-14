@@ -2,35 +2,21 @@ import base_functions as bf
 import analysis as an
 import os, random, glob
 
+import process
+
 from firebase import firebase
 
-train_path = "Dataset/train_set"
-os.chdir(train_path)
+DATABASE_URL = "https://odk-x-push.firebaseio.com/"
+TRAIN_SET_PATH = "dataset/train_set"
 
-filelist = glob.glob("*.h5")
+def main():
+    os.chdir(TRAIN_SET_PATH)
+    train_images = glob.glob("*.h5")
+    dbReference = firebase.FirebaseApplication(DATABASE_URL, None)
+    for image_path in train_images:
+        finalArray = process.apply_algorithms(image_path)
+        print(finalArray)
+        print(dbReference.post('/cloudNine', finalArray))
 
-firebase = firebase.FirebaseApplication("https://odk-x-push.firebaseio.com/", None)
-
-for file in filelist:
-    data = bf.load_image(file)
-    # bf.get_image_information(filename)
-
-    # grey-level array
-    grey = an.get_grey_level_array(data)
-
-    # texture analysis
-    text = an.get_texture_analysis(data)
-
-    # shape analysis
-    shape = an.get_shape_analysis(data, False)
-
-    finalArray = { 
-        "filename": file,
-        "grey": grey,
-        "texture": text,
-        "shape": shape
-    }
-
-    print(finalArray)
-
-    print(firebase.post('/cloudNine', finalArray))
+if __name__ == "__main__":
+    main()
