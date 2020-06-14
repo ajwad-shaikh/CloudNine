@@ -19,7 +19,7 @@ def main():
     bf.show_images([data, bindata, opened, closed, canny(closed)])
 
 def get_grey_level_array(data): # returns 16-bin grey-level distribution
-    return np.histogram(data.ravel(), bins=16)[0]
+    return (np.histogram(data.ravel(), bins=16)[0]).tolist()
 
 def get_texture_analysis(data): # returns grey-level cooccurennce matrix properties in array form
     glcm = greycomatrix(data, [1], [0, np.pi/4, np.pi/2, 3*np.pi/4], 1024, normed=False)
@@ -30,7 +30,7 @@ def get_texture_analysis(data): # returns grey-level cooccurennce matrix propert
     feat_array = [con[0], enr[0], cor[0], dis[0]]
     means = np.mean(feat_array, axis=1)
     std_dev = np.std(feat_array, axis=1)
-    return np.concatenate((means, std_dev))
+    return np.concatenate((means, std_dev)).tolist()
 
 def get_shape_analysis(data, show_plot): # returns shape analysis features and plots
     thres = np.quantile(data.ravel(), 0.65)

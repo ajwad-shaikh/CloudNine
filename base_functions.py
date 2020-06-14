@@ -3,16 +3,16 @@ import matplotlib.pyplot as plt
 import h5py
 
 def main():
-    f = h5py.File('Dataset/test1.h5', 'r')
+    f = h5py.File('test2.h5', 'r')
     # print(*list(f['PRODUCT_INFORMATION'].attrs.items()), sep='\n')
-    # dset = f['VHRR']['Image Data']['VHRR_TIR']
-    # print(dset)
-    # data = np.array(dset[:,:])
-    #plt.imshow(data, cmap='gray')
-    #plt.show()
+    dset = f['VHRR']['Image Data']['VHRR_TIR']
+    print(dset)
+    data = np.array(dset[:,:])
+    #show_image(data)
+    plot_hist_bin(data, 16)
 
 def load_image(filename): # give filename inside Dataset folder, returns numpy array
-    f = h5py.File('Dataset/' + filename, 'r')
+    f = h5py.File(filename, 'r')
     dset = f['VHRR']['Image Data']['VHRR_TIR']
     # print(dset)
     data = np.array(dset[:,:])
@@ -21,7 +21,7 @@ def load_image(filename): # give filename inside Dataset folder, returns numpy a
 def show_image(data): # plot image using matplotlib, returns plot
     plt.figure()
     plt.imshow(data, cmap='gray')
-    #plt.show()
+    plt.show()
 
 def plot_hist(data): # plot histogram
     plt.hist(data.ravel())
@@ -32,7 +32,7 @@ def plot_hist_bin(data, bins): # plot histogram with bins
     plt.show()
 
 def get_image_information(filename):
-    f = h5py.File('Dataset/' + filename, 'r')
+    f = h5py.File(filename, 'r')
     print(*list(f['PRODUCT_INFORMATION'].attrs.items()), sep='\n')
     print(*list(f['PRODUCT_METADATA']['PRODUCT_DETAILS'].attrs.items()), sep='\n')
 

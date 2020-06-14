@@ -1,0 +1,6 @@
+requests
+python-firebase
+numpy
+matplotlib
+h5py
+scikit-image
