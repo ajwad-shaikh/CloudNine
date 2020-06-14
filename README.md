@@ -13,6 +13,21 @@ A Python Implementation for Satellite Cloud Image Processing and Information Ret
 
 This will install the necessary dependencies for the function scripts.
 
+## Dataset
+
+The Dataset was ordered from MOSDAC (Meteorological and Oceanographic Satellite Data Archival Centre) maintained and sourced from Indian Space Research Organization (ISRO) Kalpana Satellite. We have 603 satellite images in HDF5 format but due to the bulk size of the dataset, it has not been included in the repository.
+
+To get the project to work, you need the complete or at least part of the database - 
+    
+1. Download the complete dataset from here -> [dataset.zip](https://drive.google.com/file/d/1wjWE7kmlHOFMN8FYHZd01rhKtsmpvUUh/view?usp=sharing) (890 MB)
+    - You can then unpack the archive in `<project_root>/dataset`
+    - This will help you run the project full-fledged with the similar images displayed alongside query image from the validation set
+2. Download the validation set of images from here -> [validation_set.zip](https://drive.google.com/file/d/12iaBgFLypnFJyy1DCQEjrm5WpckBc6q1/view?usp=sharing) (78 MB)
+    - You can then unpack the archive in `<project_root>/dataset/validation_set`
+    - This will help you run the project as MVP, but will only return image names of the matched images from train set instead of actual images.
+
+## Scripts in the Module
+
 The module contains different python programs that are interdependent for use in the project
 
 - ### base_functions.py
