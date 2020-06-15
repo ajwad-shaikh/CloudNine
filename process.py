@@ -1,8 +1,13 @@
 import base_functions as bf
 import analysis as an
+import argparse
 
 def main():
-    filename = "test2.h5"
+    parser = argparse.ArgumentParser(description='Process Image through CloudNine Algorithm')
+    parser.add_argument("image_path", metavar="image_path", type=str, 
+                        help="Path to HDF5 Image to process as per algorithm")
+    args = parser.parse_args()
+    filename = args.image_path
     data = bf.load_image(filename)
     bf.get_image_information(filename)
 
@@ -21,7 +26,7 @@ def main():
         "shape": shape
     }
 
-    print(finalArray)
+    print("Feature Array: ",finalArray)
 
 def apply_algorithms(filename):
     data = bf.load_image(filename)      # load image

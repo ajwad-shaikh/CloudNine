@@ -43,7 +43,8 @@ The module contains different python programs that are interdependent for use in
 
 We have computed and uploaded features of all images in the training set (550 images) to a Firebase Realtime Database. You can view the feature database here -> [Link to Database](https://odk-x-push.firebaseio.com/cloudNine.json)
 
-Course - CS313a - Image Processing 
-Mentor - Dr. Pritee Khanna
-Team - [Ajwad Shaikh](https://ajwad-shaikh.github.io) and Kaushal Sharma
-Institute - Indian Institute of Information Technology, Design and Manufacturing, Jabalpur
+## Project Details
+- Mentor - Dr. Pritee Khanna
+- Team - [Ajwad Shaikh](https://ajwad-shaikh.github.io) and Kaushal Sharma
+- Course - CS313a - Image Processing - Spring 2020
+- Institute - Indian Institute of Information Technology, Design and Manufacturing, Jabalpur
