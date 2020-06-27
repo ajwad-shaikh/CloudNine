@@ -31,13 +31,15 @@ To get the project to work, you need the complete or at least part of the databa
 The module contains different python programs that are interdependent for use in the project
 
 - ### base_functions.py
-    - Contains basic file I/O functions, especially to deal with h5 type images as received by ISRO Database
+    - Contains basic file I/O functions, especially to deal with h5 type images as received from ISRO Database
 - ### analysis.py 
     - Contains analysis functions such as histogram processing, shape and texture analysis to derive the required feature lists that we want to store
 - ### process.py
     - Contains a function to process a single image as per algorithm in the paper and generate a feature object
 - ### upload.py
     - Contains script to calculate features of train set and upload the results to Firebase Realtime Database
+- ### search.py
+    - Contains search and compare functionality to query with validation images and get matching image from training set (feature database)
 
 ## Feature Database
 

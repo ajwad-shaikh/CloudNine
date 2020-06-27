@@ -51,9 +51,9 @@ def show_images(images: list):
         # plt.axis('off')
     plt.show(block=True)
 
-def show_result(sourceImageData, matchImageData):
+def show_result(sourceImageData, matchImageData, heading):
     fig, (ax1,ax2) = plt.subplots(1, 2)
-    fig.suptitle = ("Final Result")
+    plt.suptitle(heading)
     ax1.imshow(sourceImageData['image'], cmap='gray')
     ax1.set_title("Source Image: {}".format(sourceImageData['name']))
     ax1.axis('off')

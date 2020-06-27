@@ -1,4 +1,4 @@
-import os, glob, sys, math
+import os, glob, sys, math, statistics as stat
 import base_functions as bf
 import urllib.request as request
 import process
@@ -10,9 +10,16 @@ BACK_TO_ROOT_REF = "../.."
 TRAIN_DATA = {}
 
 def main():
+    CHECK_DATA = getDatasetStatus()
+    if CHECK_DATA == 1:
+        print("Full Fledged Mode Active: All data present!")
+    elif CHECK_DATA == 0:
+        print("MVP Mode Active: Only Validation Data present!")
+    elif CHECK_DATA == -1:
+        print("No Dataset Available -> Read instructions from README")
+        return
     while True:
-        print("Enter Choice: ")
-        choice = input()
+        choice = input("Enter Choice: ")
         if choice == '1':
             printOptions()
         elif choice == '2':
@@ -71,7 +78,14 @@ def searchQuery():
     os.chdir(BACK_TO_ROOT_REF)
     matchImageData = {'image': match_image_data, 'name': match_image_name}
     sourceImageData = {'image': source_image_data, 'name': source_image_name}
-    bf.show_result(sourceImageData, matchImageData)
+    bf.show_result(sourceImageData, matchImageData, "Result by Original Algorithm")
+    match_image_name = compareNew(sourceFinalArray)
+    os.chdir(TRAIN_SET_PATH)
+    match_image_data = bf.load_image(match_image_name)
+    os.chdir(BACK_TO_ROOT_REF)
+    matchImageData = {'image': match_image_data, 'name': match_image_name}
+    sourceImageData = {'image': source_image_data, 'name': source_image_name}
+    bf.show_result(sourceImageData, matchImageData, "Result by Improved Matching Algorithm")
     # bf.show_image(query_image_data)
     # print(sourceFinalArray)
 
@@ -80,7 +94,7 @@ def compare(sourceArray):
     score = sys.maxsize
     match = ''
     for key, data in TRAIN_DATA.items():
-        diffGrey = math.sqrt(math.sqrt(sum([(x1-x2)**2 for (x1,x2) in zip(sourceArray['grey'],data['grey'])])))
+        diffGrey = math.sqrt(sum([(x1-x2)**2 for (x1,x2) in zip(sourceArray['grey'],data['grey'])]))
         diffShape = math.sqrt(sum([(x1-x2)**2 for (x1,x2) in zip(sourceArray['shape'],data['shape'])]))
         diffTexture = math.sqrt(sum([(x1-x2)**2 for (x1,x2) in zip(sourceArray['texture'],data['texture'])]))
         diffScore = diffTexture + diffShape + diffGrey
@@ -89,6 +103,37 @@ def compare(sourceArray):
             match = data['filename']
             print(diffGrey, diffShape, diffTexture, diffScore)
     return match
+
+def compareNew(sourceArray):
+    global TRAIN_DATA, rangeDiffGrey, rangeDiffTexture, rangeDiffShape
+    score = sys.maxsize
+    rangeDiffGrey = rangeDiffTexture = rangeDiffShape = 0
+    for key, data in TRAIN_DATA.items():
+        diffGrey = math.sqrt(stat.mean([(x1-x2)**2 for (x1,x2) in zip(sourceArray['grey'],data['grey'])]))
+        diffShape = math.sqrt(stat.mean([(x1-x2)**2 for (x1,x2) in zip(sourceArray['shape'],data['shape'])]))
+        diffTexture = math.sqrt(stat.mean([(x1-x2)**2 for (x1,x2) in zip(sourceArray['texture'],data['texture'])]))
+        rangeDiffGrey = max(rangeDiffGrey, diffGrey)
+        rangeDiffShape = max(rangeDiffShape, diffShape)
+        rangeDiffTexture = max(rangeDiffTexture, diffTexture)
+    match = ''
+    for key, data in TRAIN_DATA.items():
+        diffGrey = math.sqrt(stat.mean([(x1-x2)**2 for (x1,x2) in zip(sourceArray['grey'],data['grey'])]))/rangeDiffGrey
+        diffShape = math.sqrt(stat.mean([(x1-x2)**2 for (x1,x2) in zip(sourceArray['shape'],data['shape'])]))/rangeDiffShape
+        diffTexture = math.sqrt(stat.mean([(x1-x2)**2 for (x1,x2) in zip(sourceArray['texture'],data['texture'])]))/rangeDiffTexture
+        diffScore = diffTexture + diffShape + diffGrey
+        if diffScore < score:
+            score = diffScore
+            match = data['filename']
+            print(diffGrey, diffShape, diffTexture, diffScore)
+    return match
+
+def getDatasetStatus():
+    status = -1
+    if os.path.isdir(VALIDATION_SET_PATH) and os.path.isdir(TRAIN_SET_PATH):
+        status = 1
+    elif os.path.isdir(VALIDATION_SET_PATH):
+        status = 0
+    return status
     
 if __name__ == "__main__":
     main()
