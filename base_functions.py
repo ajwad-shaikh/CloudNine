@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import h5py
+import math
 
 def main():
     f = h5py.File('test2.h5', 'r')
@@ -36,14 +37,18 @@ def get_image_information(filename):
     print(*list(f['PRODUCT_INFORMATION'].attrs.items()), sep='\n')
     print(*list(f['PRODUCT_METADATA']['PRODUCT_DETAILS'].attrs.items()), sep='\n')
 
-def show_images(images: list) -> None:
-    n: int = len(images)
-    f = plt.figure()
+def show_images(images: list):
+    n = len(images)
+    root_n = math.ceil(math.sqrt(n))
+    f, ax = plt.subplots(nrows=root_n, ncols=root_n)
     for i in range(n):
         # Debug, plot figure
-        f.add_subplot(1, n, i + 1)
-        plt.imshow(images[i], cmap='gray')
-        plt.axis('off')
+        ax[i//root_n, i%root_n].imshow(images[i], cmap='gray')
+        ax[i//root_n, i%root_n].set_title("Image Id: {}".format(i))
+        ax[i//root_n, i%root_n].axis('off')
+        # f.add_subplot(root_n, root_n, i+1)
+        # plt.imshow(images[i], cmap='gray')
+        # plt.axis('off')
     plt.show(block=True)
 
 if __name__ == "__main__":
