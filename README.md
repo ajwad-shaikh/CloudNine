@@ -3,7 +3,25 @@
 
 A Python Implementation for Satellite Cloud Image Processing and Information Retrieval System
 
-## Installation
+## Content
+
+- [Installation Steps](https://github.com/ajwad-shaikh/CloudNine#installation-steps)
+- [Dataset](https://github.com/ajwad-shaikh/CloudNine#dataset)
+- [Scripts in the Module](https://github.com/ajwad-shaikh/CloudNine#scripts-in-the-module)
+    - [base_functions.py](https://github.com/ajwad-shaikh/CloudNine#base_functionspy)
+    - [analysis.py](https://github.com/ajwad-shaikh/CloudNine#analysispy)
+    - [process.py](https://github.com/ajwad-shaikh/CloudNine#processpy)
+    - [upload.py](https://github.com/ajwad-shaikh/CloudNine#uploadpy)
+    - [search.py](https://github.com/ajwad-shaikh/CloudNine#searchpy)
+- [Feature Database](https://github.com/ajwad-shaikh/CloudNine#feature-database)
+- [Results](https://github.com/ajwad-shaikh/CloudNine#results)
+    - [The Algorithm](https://github.com/ajwad-shaikh/CloudNine#the-algorithm)
+    - [Algorithm Results](https://github.com/ajwad-shaikh/CloudNine#algorithm-results)
+    - [Improvement to the Algorithm](https://github.com/ajwad-shaikh/CloudNine#improvement-to-the-algorithm)
+    - [Improved Results](https://github.com/ajwad-shaikh/CloudNine#improved-results)
+- [Project Details](https://github.com/ajwad-shaikh/CloudNine#project-details)
+
+## Installation Steps
 
 - `git clone https://github.com/ajwad-shaikh/CloudNine.git`
 - `cd CloudNine`
@@ -19,12 +37,14 @@ The Dataset was ordered from [MOSDAC (Meteorological and Oceanographic Satellite
 
 To get the project to work, you need the complete or at least part of the database - 
     
-1. Download the complete dataset from here -> [dataset.zip](https://drive.google.com/file/d/1wjWE7kmlHOFMN8FYHZd01rhKtsmpvUUh/view?usp=sharing) (890 MB)
-    - You can then unpack the archive in `<project_root>/dataset`
-    - This will help you run the project full-fledged with the similar images displayed alongside query image from the validation set
-2. Download the validation set of images from here -> [validation_set.zip](https://drive.google.com/file/d/12iaBgFLypnFJyy1DCQEjrm5WpckBc6q1/view?usp=sharing) (78 MB)
-    - You can then unpack the archive in `<project_root>/dataset/validation_set`
-    - This will help you run the project as MVP, but will only return image names of the matched images from train set instead of actual images.
+### 1. Full Fledged Installation 
+- Download the complete dataset from here -> [dataset.zip](https://drive.google.com/file/d/1wjWE7kmlHOFMN8FYHZd01rhKtsmpvUUh/view?usp=sharing) (890 MB)
+- You can then unpack the archive in `<project_root>/dataset`
+- This will help you run the project full-fledged with the similar images displayed alongside query image from the validation set
+### 2. MVP Installation
+- Download the validation set of images from here -> [validation_set.zip](https://drive.google.com/file/d/12iaBgFLypnFJyy1DCQEjrm5WpckBc6q1/view?usp=sharing) (78 MB)
+- You can then unpack the archive in `<project_root>/dataset/validation_set`
+- This will help you run the project as MVP, but will only return image names of the matched images from train set instead of actual images.
 
 ## Scripts in the Module
 
