@@ -55,7 +55,7 @@ The primary objective of the project was to evaluate features of cloud formation
 
 ### Algorithm Results
 
-![Algorithm Results](https://raw.githubusercontent.com/ajwad-shaikh/CloudNine/master/static/Algorithm_Result.png)
+![Algorithm Results](https://raw.githubusercontent.com/ajwad-shaikh/CloudNine/master/static/AlgorithmResult.png)
 
 ### Improvement to the Algorithm
 
