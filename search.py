@@ -8,9 +8,12 @@ VALIDATION_SET_PATH = "dataset/validation_set"
 TRAIN_SET_PATH = "dataset/train_set"
 BACK_TO_ROOT_REF = "../.."
 TRAIN_DATA = {}
+CHECK_DATA = -1
 
 def main():
+    global CHECK_DATA
     CHECK_DATA = getDatasetStatus()
+    print("\n\n************** CloudNine **************\n")
     if CHECK_DATA == 1:
         print("Full Fledged Mode Active: All data present!")
     elif CHECK_DATA == 0:
@@ -19,17 +22,15 @@ def main():
         print("No Dataset Available -> Read instructions from README")
         return
     while True:
-        choice = input("Enter Choice: ")
+        choice = input("\n1: Show Validation Images\n2: Fetch Train Data from Remote Database\n3: Begin Search Query\nEnter any other choice to exit\nEnter Choice: ")
         if choice == '1':
-            printOptions()
-        elif choice == '2':
             showOptions()
+        elif choice == '2':
+            fetchTrainData()
         elif choice == '3':
-            print(fetchTrainData())
-        elif choice == '4':
             searchQuery()
         else:
-            compare(process.apply_algorithms("test2.h5"))
+            break
 
 
 def printOptions():
@@ -61,7 +62,7 @@ def fetchTrainData():
     return TRAIN_DATA
 
 def searchQuery():
-    global TRAIN_DATA
+    global TRAIN_DATA, CHECK_DATA
     if not TRAIN_DATA:
         if not fetchTrainData():
             print("Could Not Search due to possible Network Error")
@@ -72,20 +73,28 @@ def searchQuery():
     source_image_data = bf.load_image(source_image_name)
     sourceFinalArray = process.apply_algorithms(source_image_name)
     os.chdir(BACK_TO_ROOT_REF)
+    
     match_image_name = compare(sourceFinalArray)
-    os.chdir(TRAIN_SET_PATH)
-    match_image_data = bf.load_image(match_image_name)
-    os.chdir(BACK_TO_ROOT_REF)
-    matchImageData = {'image': match_image_data, 'name': match_image_name}
-    sourceImageData = {'image': source_image_data, 'name': source_image_name}
-    bf.show_result(sourceImageData, matchImageData, "Result by Original Algorithm")
+    if CHECK_DATA == 1:
+        os.chdir(TRAIN_SET_PATH)
+        match_image_data = bf.load_image(match_image_name)
+        os.chdir(BACK_TO_ROOT_REF)
+        matchImageData = {'image': match_image_data, 'name': match_image_name}
+        sourceImageData = {'image': source_image_data, 'name': source_image_name}
+        bf.show_result(sourceImageData, matchImageData, "Result by Original Algorithm")
+    elif CHECK_DATA == 0:
+        print("Best Match Image (By Original Algorithm): ", match_image_name)
+    
     match_image_name = compareNew(sourceFinalArray)
-    os.chdir(TRAIN_SET_PATH)
-    match_image_data = bf.load_image(match_image_name)
-    os.chdir(BACK_TO_ROOT_REF)
-    matchImageData = {'image': match_image_data, 'name': match_image_name}
-    sourceImageData = {'image': source_image_data, 'name': source_image_name}
-    bf.show_result(sourceImageData, matchImageData, "Result by Improved Matching Algorithm")
+    if CHECK_DATA == 1:
+        os.chdir(TRAIN_SET_PATH)
+        match_image_data = bf.load_image(match_image_name)
+        os.chdir(BACK_TO_ROOT_REF)
+        matchImageData = {'image': match_image_data, 'name': match_image_name}
+        sourceImageData = {'image': source_image_data, 'name': source_image_name}
+        bf.show_result(sourceImageData, matchImageData, "Result by Improved Matching Algorithm")
+    elif CHECK_DATA == 0:
+        print("Best Match Image (By Improved Matching Algorithm): ", match_image_name)
     # bf.show_image(query_image_data)
     # print(sourceFinalArray)
 
@@ -101,7 +110,7 @@ def compare(sourceArray):
         if diffScore < score:
             score = diffScore
             match = data['filename']
-            print(diffGrey, diffShape, diffTexture, diffScore)
+            # print(diffGrey, diffShape, diffTexture, diffScore)
     return match
 
 def compareNew(sourceArray):
@@ -124,7 +133,7 @@ def compareNew(sourceArray):
         if diffScore < score:
             score = diffScore
             match = data['filename']
-            print(diffGrey, diffShape, diffTexture, diffScore)
+            # print(diffGrey, diffShape, diffTexture, diffScore)
     return match
 
 def getDatasetStatus():
