@@ -7,6 +7,8 @@ A Python Implementation for Satellite Cloud Image Processing and Information Ret
 
 - [Installation Steps](https://github.com/ajwad-shaikh/CloudNine#installation-steps)
 - [Dataset](https://github.com/ajwad-shaikh/CloudNine#dataset)
+    - [Full Fledged Installation](https://github.com/ajwad-shaikh/CloudNine#1-full-fledged-installation)
+    - [MVP Installation](https://github.com/ajwad-shaikh/CloudNine#2-mvp-installation)
 - [Scripts in the Module](https://github.com/ajwad-shaikh/CloudNine#scripts-in-the-module)
     - [base_functions.py](https://github.com/ajwad-shaikh/CloudNine#base_functionspy)
     - [analysis.py](https://github.com/ajwad-shaikh/CloudNine#analysispy)
