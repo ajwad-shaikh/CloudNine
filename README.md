@@ -45,8 +45,18 @@ The module contains different python programs that are interdependent for use in
 
 We have computed and uploaded features of all images in the training set (550 images) to a Firebase Realtime Database. You can view the feature database here -> [Link to Database](https://odk-x-push.firebaseio.com/cloudNine.json)
 
+## Results 
+
+The primary objective of the project was to evaluate features of cloud formation from a satellite image and then retrieve a similar cloud formation image from the training database. We have followed the implementation of feature retrieval algorithm as mentioned in [Satellite Cloud Image Processing and Retrieval System *(2012 World Congress on Information and Communication Technologies)*](https://github.com/ajwad-shaikh/CloudNine/raw/master/gurve2012.pdf)
+
+### The Algorithm
+
+![Algorithm Workflow]("https://raw.githubusercontent.com/ajwad-shaikh/CloudNine/master/static/Algorithm.png")
+
+
 ## Project Details
 - Mentor - Dr. Pritee Khanna
 - Team - [Ajwad Shaikh](https://ajwad-shaikh.github.io) and Kaushal Sharma
 - Course - CS313a - Image Processing - Spring 2020
 - Institute - Indian Institute of Information Technology, Design and Manufacturing, Jabalpur
+- Project Licensed under [The MIT License](https://github.com/ajwad-shaikh/CloudNine/blob/master/LICENSE.md)
