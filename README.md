@@ -8,7 +8,7 @@ A Python Implementation for Satellite Cloud Image Processing and Information Ret
 - `git clone https://github.com/ajwad-shaikh/CloudNine.git`
 - `cd CloudNine`
 - `virtualenv env`
-- `"src/scripts/activate"`
+- `"env/scripts/activate"`
 - `pip install -r requirements.txt`
 
 This will install the necessary dependencies for the function scripts.
@@ -55,9 +55,31 @@ The primary objective of the project was to evaluate features of cloud formation
 
 ### Algorithm Results
 
-![Algorithm Results](https://raw.githubusercontent.com/ajwad-shaikh/CloudNine/master/static/Image_9_Original.png)
+![Algorithm Results](https://raw.githubusercontent.com/ajwad-shaikh/CloudNine/master/static/Algorithm_Result.png)
 
 ### Improvement to the Algorithm
+
+The Algorithm works very well as it takes into account three aspects of the image - Grey-level, Shape and Texture. However, in order to calculate similarity between the two images the formula given in the original image is as follows -
+
+![Original Similarity Formula](https://raw.githubusercontent.com/ajwad-shaikh/CloudNine/master/static/Original_Similarity.png)
+
+We have improved the formula to remove bias of the formula towards feature sets that have more number of values and also larger values. The new improved formula to calculate image similarity is as follows -
+
+![Improved Similarity Formula](https://raw.githubusercontent.com/ajwad-shaikh/CloudNine/master/static/Improved_Similarity.png)
+
+### Improved Results 
+
+- Case 1
+    - Result with Original Algorithm
+    ![Original Image 9](https://raw.githubusercontent.com/ajwad-shaikh/CloudNine/master/static/Image_9_Original.png)
+    - Result with Improved Matching Algorithm
+    ![Improved Image 9](https://raw.githubusercontent.com/ajwad-shaikh/CloudNine/master/static/Image_9_Improved.png)
+
+- Case 2
+    - Result with Original Algorithm 
+    ![Original Image 24](https://raw.githubusercontent.com/ajwad-shaikh/CloudNine/master/static/Image_24_Original.png)
+    - Result with Improved Matching Algorithm
+    ![Improved Image 24](https://raw.githubusercontent.com/ajwad-shaikh/CloudNine/master/static/Image_24_Improved.png)
 
 
 ## Project Details
